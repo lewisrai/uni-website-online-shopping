@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Product</title>
+{% endblock %}
+
+{% block navbar_left %}
+    {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
+    {% else %}
+        <li><a href="{{url_for('views.login')}}">Login</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">{{product['info'].name}}</h1>
+
+    <div class="column">
+        <img src="{{url_for('static', filename=product['info'].image)}}" alt="'{{product['info'].name}}' Logo">
+        <p>Price: {{product['info'].price}}</p>
+        <p>Description: {{product['info'].description}}</p>
+        <p>Impact: {{product['info'].impact}}</p>
+        {{wtf.quick_form(product['form'])}}
+    </div>
+{% endblock %}

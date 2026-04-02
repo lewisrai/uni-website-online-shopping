@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Product</title>
+{% endblock %}
+
+{% block navbar_left %}
+    {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
+    {% else %}
+        <li><a href="{{url_for('views.login')}}">Login</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">Product Not Found</h1>
+{% endblock %}

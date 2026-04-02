@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - My basket</title>
+{% endblock %}
+
+{% block navbar_left %}
+    {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
+    {% else %}
+        <li><a href="{{url_for('views.login')}}">Login</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">My Basket</h1>
+
+    <div class="column-container">
+        {% for item in basket %}
+            <div class="column">
+                <img src="{{url_for('static', filename=item['info'].image)}}" alt="'{{item['info'].name}} Logo'">
+                <p>{{item['info'].name}}: x{{item['amount']}}, Total: {{item['price']}}</p>
+                {{wtf.quick_form(item['form'])}}
+            </div>
+        {% endfor %}
+    </div>
+
+    <p>Total cost: {{cost}}</p>
+    <a href="{{url_for('views.checkout')}}">
+        <button type="button">Checkout</button>
+    </a>
+{% endblock %}

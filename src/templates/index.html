@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Home</title>
+{% endblock %}
+
+{% block navbar_left %}
+    {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('views.logout')}}">Logout</a></li>
+    {% else %}
+        <li><a href="{{url_for('views.login')}}">Login</a></li>
+    {% endif %}
+
+    <li><a>- Sort by:</a></li>
+    <li><a href="{{url_for('views.index', order='name')}}">Name</a></li>
+    <li><a href="{{url_for('views.index', order='price')}}">Price</a></li>
+    <li><a href="{{url_for('views.index', order='impact')}}">Impact</a></li>
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">Products for Sale</h1>
+
+    <div class="column-container">
+        {% for product in products %}
+            <div class="column-divisor">
+                <div class="column">
+                    <a href="{{url_for('views.product', product_id=product['info'].id)}}">
+                        <h3 class="center-text">{{product['info'].name}}</h3>
+                        <img src="{{url_for('static', filename=product['info'].image)}}" alt="'{{product['info'].name}} Logo'">
+                    </a>
+                    <p>Price: {{product['info'].price}}</p>
+                    <p>Environmental impact: {{product['info'].impact}}/10</p>
+                    {{wtf.quick_form(product['form'])}}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

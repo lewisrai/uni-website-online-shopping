@@ -1,0 +1,34 @@
+{% import "bootstrap/wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href={{url_for('static', filename='global.css')}} type="text/css">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{url_for('views.index')}}">Home</a></li>
+                    <li><a href="{{url_for('views.basket')}}">Basket</a></li>
+                    {% block navbar_left %}
+                    {% endblock %}
+                </ul>
+                <ol>
+                    {% if current_user.is_authenticated %}
+                        <li><a>Logged in as: {{current_user.username}}</a></li>
+                    {% endif %}
+                </ol>
+            </nav>
+        </header>
+
+        <div class="main-container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

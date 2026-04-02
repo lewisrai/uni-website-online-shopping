@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Success</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">Success!</h1>
+
+    {% for item in basket %}
+        <div class="column">
+            <img src="{{url_for('static', filename=item['info'].image)}}" alt="'{{item['info'].name}} Logo'">
+            <p>{{item['info'].name}}: x{{item['amount']}}, Total: {{item['price']}}</p>
+        </div>
+    {% endfor %}
+
+    <p>Total cost: {{cost}}</p>
+    <a href="{{url_for('views.index')}}">
+        <button type="button">Home</button>
+    </a>
+{% endblock %}

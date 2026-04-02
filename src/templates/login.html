@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Login</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">Login</h1>
+
+    <div class="column">
+        {{wtf.quick_form(form)}}
+    </div>
+
+    <a href="{{url_for('views.signup')}}">
+        <button type="button">Signup</button>
+    </a>
+{% endblock %}

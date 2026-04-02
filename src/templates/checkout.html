@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Nozama - Checkout</title>
+{% endblock %}
+
+{% block content %}
+    <h1 class="center-text">Checkout</h1>
+
+    <p>Total cost: {{cost}}</p>
+
+    <div class="column">
+        {{wtf.quick_form(form)}}
+        <a href="{{url_for('views.basket')}}">
+            <button type="button">Cancel</button>
+        </a>
+    </div>
+{% endblock %}
